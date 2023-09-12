@@ -9,8 +9,10 @@ __pycache__/
 # Distribution / packaging
 .Python
 build/
+venv/
 develop-eggs/
 dist/
+*.DS_Store
 downloads/
 eggs/
 .eggs/
