@@ -35,7 +35,7 @@ def maxSatisfaction(satisfaction):
             return max_res
     return max_res
     
-#Call to test
+#Test functionality
 
 print(maxSatisfaction([-1,-8,0,5,-7]))
 print(maxSatisfaction([4,3,2]))
