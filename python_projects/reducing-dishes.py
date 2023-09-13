@@ -10,30 +10,51 @@ Dishes can be prepared in any order and the chef can discard some dishes to get 
 """
 
 def maxSatisfaction(satisfaction):
-    sort_sati = list(sorted(satisfaction))
+    """
+    Calculates the maximum total satisfaction that can be obtained by arranging tasks in a specific order.
+
+    Args:
+    satisfaction (list[int]): A list of satisfaction values for each task.
+
+    Returns:
+    int: The maximum total satisfaction.
+    """
+
+    # Sort the satisfaction values in ascending order
+    sorted_satisfaction = sorted(satisfaction)
+    
+    # Separate non-negative and negative satisfaction values
     non_negative = []
     negative = []
-    for num in sort_sati:
+    
+    for num in sorted_satisfaction:
         if num >= 0:
             non_negative.append(num)
         else:
             negative.insert(0, num)
-    #print(negative, non_negative)
+    
     def calculate_final(list_):
-        ret = 0
+        # Calculates the total satisfaction for a given arrangement of tasks
+        total_satisfaction = 0
         for x in range(len(list_)):
-            ret += list_[x]*(x+1)
-        return ret
+            total_satisfaction += list_[x] * (x + 1)
+        return total_satisfaction
+    
     final_list = non_negative
-    max_res = calculate_final(final_list)
+    max_total_satisfaction = calculate_final(final_list)
+    
+    # Try adding negative satisfaction values to the beginning of the list to maximize satisfaction
     for x in negative:
         final_list.insert(0, x)
-        res = calculate_final(final_list)
-        if res > max_res:
-            max_res = res
+        total_satisfaction = calculate_final(final_list)
+        if total_satisfaction > max_total_satisfaction:
+            max_total_satisfaction = total_satisfaction
         else:
-            return max_res
-    return max_res
+            # If adding more negative values doesn't improve satisfaction, return the current maximum
+            return max_total_satisfaction
+    
+    return max_total_satisfaction
+
     
 #Test functionality
 

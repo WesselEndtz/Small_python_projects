@@ -8,33 +8,46 @@ You may assume that each input would have exactly one solution.
 """
 
 def threeSumClosest(nums, target):
-    nums.sort()
-    res = 0
-    Best_diff = 999999
-    print(nums)
+    """
+    Finds the closest possible sum of three numbers from a sorted list to a target value.
+
+    Args:
+    nums (list[int]): The sorted input list of numbers.
+    target (int): The target value to get closest to using three numbers from the list.
+
+    Returns:
+    int: The closest possible sum of three numbers to the target value.
+    """
+
+    nums.sort()  # Sort the input list for efficient traversal
+    closest_sum = 0  # Stores the closest sum found
+    best_difference = float('inf')  # Stores the best difference between the target and the closest sum
+    
     for i in range(len(nums)):
-        left, right = i+1, len(nums)-1
+        left, right = i + 1, len(nums) - 1
+        
         while left < right:
-            #print(i, left, right)
-            #print(nums[i], nums[left], nums[right])
-            total = nums[i] + nums[left] + nums[right]
-            if total > target:
+            current_sum = nums[i] + nums[left] + nums[right]
+            
+            # Calculate the absolute difference between the target and the current sum
+            difference = abs(target - current_sum)
+            
+            if current_sum > target:
                 right -= 1
-                diff = abs(target - total)
-                if diff < Best_diff:
-                    res = total
-                    Best_diff = diff
-            elif total < target:
+                if difference < best_difference:
+                    closest_sum = current_sum
+                    best_difference = difference
+            elif current_sum < target:
                 left += 1
-                diff = abs(target - total)
-                if diff < Best_diff:
-                    res = total
-                    Best_diff = diff
+                if difference < best_difference:
+                    closest_sum = current_sum
+                    best_difference = difference
             else:
-                res = total
-                break
-            #print("difference between numbers : " + str(diff), "calculation : " + str(target) + " and " + str(total))
-    return res
+                # If the current sum is equal to the target, return it as the closest sum
+                return current_sum
+    
+    return closest_sum
+
     
 #Test functionality
 

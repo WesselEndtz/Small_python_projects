@@ -10,13 +10,30 @@ Return the integer denoting the number of employees who worked at least target h
 """
 
 def numberOfEmployeesWhoMetTarget(hours: list[int], target: int) -> int:
-    hours = sorted(hours)[::-1]
-    num = 0
+    """
+    Calculates the number of employees who met or exceeded a target number of hours worked.
+
+    Args:
+    hours (list[int]): A list of hours worked by employees.
+    target (int): The target number of hours to meet or exceed.
+
+    Returns:
+    int: The number of employees who met or exceeded the target hours.
+    """
+
+    # Sort the list of hours in descending order for efficient traversal
+    hours = sorted(hours, reverse=True)
+    
+    num_employees_met_target = 0  # Stores the number of employees who met or exceeded the target
+    
     for hour in hours:
         if hour < target:
-            return num
-        num += 1
-    return num
+            # If an employee's hours are less than the target, stop counting and return the result
+            return num_employees_met_target
+        num_employees_met_target += 1
+    
+    return num_employees_met_target
+
     
 #Test functionality
 print(numberOfEmployeesWhoMetTarget([0,1,2,3,4], 2))

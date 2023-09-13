@@ -8,16 +8,33 @@ Note that points on the edge of a vertical area are not considered included in t
 """
 
 def maxWidthOfVerticalArea(points: list[list[int]]) -> int:
-    x_list = []
-    for point in points:
-        x_list.append(point[0])
-    x_list = list(sorted(x_list))
-    max_diff = 0
-    for x in range(len(x_list)-1):
-        diff = x_list[x+1]-x_list[x]
-        if diff > max_diff:
-            max_diff = diff
-    return max_diff
+    """
+    Calculates the maximum width of a vertical area formed by a set of points.
+
+    Args:
+    points (list[list[int]]): A list of points in the form [x, y].
+
+    Returns:
+    int: The maximum width of the vertical area.
+    """
+
+    # Extract the x-coordinates from the list of points
+    x_coordinates = [point[0] for point in points]
+    
+    # Sort the x-coordinates in ascending order
+    x_coordinates = sorted(x_coordinates)
+    
+    max_width = 0  # Stores the maximum width of the vertical area
+    
+    # Calculate the differences between consecutive x-coordinates
+    for x in range(len(x_coordinates) - 1):
+        diff = x_coordinates[x + 1] - x_coordinates[x]
+        
+        if diff > max_width:
+            max_width = diff
+    
+    return max_width
+
     
 #Test functionality
 
